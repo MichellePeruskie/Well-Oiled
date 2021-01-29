@@ -9,7 +9,7 @@ Deployment-ready talent planning and tracking system built with a Python framewo
 ## Login & Registration
 1. Enter your information to register a new profile or log in if you already have a profile. 
 
-![login/reg screenshot](/WellOiled/WellOiled_App/static/img/well-oiled_homepage_screenshot.png)
+![login/reg screenshot](https://github.com/MichellePeruskie/Well-Oiled/blob/main/WellOiled_App/static/img/track_icon_homepage.png)
 
 ## Activities
 1. Edit your profile directly under your greeting. 
