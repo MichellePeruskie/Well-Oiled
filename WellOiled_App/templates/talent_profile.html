@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talent Profile</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+    <header> 
+        <div id="logodiv">
+            <a href="/"><img src="{% static 'img/Well-Oiled-Logo.png' %}" alt="well-oiled-logo" id="logo"></a>
+            <p style="font-style: italic;">The scheduling solution for your technical workforce.</p>
+        </div>
+        <div id="headerlinkdiv">
+            <a class="whitelink">Contact</a>
+            <a class="whitelink" href="/logout">Logout</a>
+        </div>
+    </header><br>
+    <p>Here you can view, edit or delete your talent's profile</p>
+    <h3>{{employee.first_name}} {{employee.last_name}}'s Profile</h3>
+    <form action="/updateemployee/{{employee.id}}" method="POST">
+        {% csrf_token %}
+        <!-- <img src="{{employee.photo}}" alt="Photo of {{employee.first_name}} {{employee.last_name}}" width="100"> -->
+        <img src="{{employee.photo}}" style="max-width: 150px;">
+        <p>Update Photo: <input type="file" name="talentphoto"></p>  
+        <p>First Name: <input type="text" name="e_f_n" value="{{employee.first_name}}"></p> <!--Instead of request post here, user_id? since it's being passed in-->
+        <p>Last Name: <input type="text" name="e_l_n" value="{{employee.last_name}}"></p>
+        <p>Company Email: <input type="text" name="e_c_email" value="{{employee.company_email}}"></p>
+        <p>Job Title: <input type="text" name="e_job" value="{{employee.job_title}}"></p>
+        <p><label for="comp_level">Competency Level: </label>
+            <select id="comp_level" name="comp_level" size="3" value="{{employee.comp_level}}">
+                <option value="level1">Level 1</option>
+                <option value="level2">Level 2</option>
+                <option value="level3">Level 3</option>
+            </select></p>
+        <p style="font-size: small;">(Current level is {{employee.comp_level}})</p>
+        <p>Home Office Zipcode: <input type="text" name="e_zip" value="{{employee.zipcode}}" size="5"></p>
+        <button type="submit">Update</button>
+        <a href="/deleteemployee/{{employee.id}}">Delete Profile</a><p style="font-size: small; color: red;"> Warning: Deleting cannot be undone.</p>
+    </form>
+    <a href="/viewemployees">View All Talent</a><br>
+</body>
+</html>
+
+
+
+

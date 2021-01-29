@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Profile</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header> 
+        <div id="logodiv">
+            <a href="/"><img src="{% static 'img/Well-Oiled-Logo.png' %}" alt="well-oiled-logo" id="logo"></a>
+            <p style="font-style: italic;">The scheduling solution for your technical workforce.</p>
+        </div>
+        <div id="headerlinkdiv">
+            <a class="whitelink">Contact</a>
+            <a class="whitelink" href="/logout">Logout</a>
+        </div>
+    </header><br>
+    <h2>Update Your Profile</h2>
+    <div class="register">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form action="/updateprofile" method="POST">
+            {% csrf_token %}
+            <h3>Update Your Information</h3>
+            <p>First Name: <input type="text" name="f_n" value="{{user.first_name}}"></p>
+            <p>Last Name: <input type="text" name="l_n" value="{{user.last_name}}"></p>
+            <p>Job Title: <input type="text" name="title" value="{{user.job_title}}"></p>
+            <p>Work Email: <input type="email" name="email" value="{{user.email}}"></p>
+            <p>Company: Contact Well-Oiled to update</p>
+            <p>Password: <input type="password" name="pw"></p>
+            <p>Confirm Password: <input type="password" name="conf_pw"></p>
+            <button type="submit">Update</button>
+        </form>    
+    </div>
+    <footer>
+        <p>.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=`, initial-scale=1.0">
+    <title>Schedule a Job</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <style type="text/css">
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 500px;
+        width: 100%;
+      }
+    </style>
+</head>
+<body>
+    <header> 
+        <div id="logodiv">
+            <a href="/"><img src="{% static 'img/Well-Oiled-Logo.png' %}" alt="well-oiled-logo" id="logo"></a>
+            <p style="font-style: italic;">The scheduling solution for your technical workforce.</p>
+        </div>
+        <div id="headerlinkdiv">
+            <a class="whitelink">Contact</a>
+            <a class="whitelink" href="/logout">Logout</a>
+        </div>
+    </header><br>
+    <h2>Find Qualified Talent</h2> 
+    <p>Enter the job location to see how far away you are from our corporate office</p><br>
+    <div class="schedulejobdiv">
+        <form action="/process" method="POST">
+        {% csrf_token %}
+            <!-- <h2>STEP 1:</h2>
+            <h3>Job Parameters</h3>
+            <p>Tap <input type="checkbox" name="p_tap"></p>
+            <p>Plug <input type="checkbox" name="p_plug"></p>
+            <p>Isolate <input type="checkbox" name="p_iso"></p>
+            <p>PSI: <input type="number" name="p_psi"></p>
+            <p>Size: <input type="number" name="p_size"> (in inches) </p>
+            <p>Angle? <input type="checkbox" name="p_angle"></p>
+            <h3>Customer</h3>
+            <p>Company: <input type="text" name="p_co"> </p>
+            <p>Job Start Date: <input type="date" name="p_start"></p>
+            <p>Estimated End Date: <input type="date" name="p_end"></p> -->
+            
+            <!-- <p>Technician Level Needed:
+                <select id="comp_level" name="comp_level" size="3">
+                    <option value="level1">Level 1</option>
+                    <option value="level2">Level 2</option>
+                    <option value="level3">Level 3</option>
+                </select></p> -->
+            <p>Job Address: <input type="text" name="p_location"></p>
+            <input type="submit" value="Drop Pin">
+        </form>
+        <p>Recent Address: <span id="user_address">{{request.session.address}}</span></p>
+    </div>
+    <h3>Where talent is located:</h3>
+    <div id="map"></div>
+    <footer>
+        <p>.</p>
+    </footer>
+</body>
+<script
+src="https://maps.googleapis.com/maps/api/js?key='MapsAPIKey'"
+defer
+></script>
+<!-- <script>
+    let map;
+
+    function initMap() {f
+        map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 35.4676, lng: -97.5164 },
+        zoom: 5,
+        });
+        //okc
+        const marker = new google.maps.Marker({
+        position: { lat: 35.4676, lng: -97.5164 },
+        map: map,
+        });
+ 
+    }
+</script> -->
+<script>
+    let map;
+    
+    function initMap() {
+        var geocoder = new google.maps.Geocoder();
+        var user_address = document.getElementById('user_address').innerHTML;
+        geocoder.geocode({address: user_address}, function (results, status) {
+            if(status == 'OK'){
+                console.log(results);
+                var latLng = results[0].geometry.location;
+                console.log(latLng);
+                map = new google.maps.Map(document.getElementById("map"), {
+                    center: latLng,
+                    zoom: 7
+                });
+                var marker = new google.maps.Marker({ position: latLng, map: map });
+            } 
+            else {
+                alert("ERROR: " + status);
+                map = new google.maps.Map(document.getElementById("map"), {
+                    center: { lat: 35.4676, lng: -97.5164 },
+                    zoom: 5
+                });
+                var marker = new google.maps.Marker({ position: { lat: 35.4676, lng: -97.5164 }, map: map});
+            }
+        })
+    }
+</script>
+</html>

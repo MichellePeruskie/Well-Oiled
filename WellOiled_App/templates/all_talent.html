@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Talent</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header> 
+        <div id="logodiv">
+            <a href="/"><img src="{% static 'img/Well-Oiled-Logo.png' %}" alt="well-oiled-logo" id="logo"></a>
+            <p style="font-style: italic;">The scheduling solution for your technical workforce.</p>
+        </div>
+        <div id="headerlinkdiv">
+            <a class="whitelink">Contact</a>
+            <a class="whitelink" href="/logout">Logout</a>
+        </div>
+    </header><br>
+    <h2>A list of all talent at {{user.company}}:</h2>
+    <p>To edit an employee, click their name from the list below.</p>
+    <div class="employee_info">
+        {% for employee in all_employees %}
+        <ul>
+            <li><a href="employeeprofile/{{employee.id}}">{{employee.first_name}} {{employee.last_name}}</a><a href="/deleteemployee/{{employee.id}}" style="font-size: x-small;"> ║ Delete Record</a></li> 
+        </ul>
+        {% endfor %}      
+    </div>
+    <div class="addtalentonboard">
+        <img src="/static/img/oilfield_workers_example.jpg" alt="Busy Workers in Houston Photo" style="max-width: 450px; float: right;">
+    </div>
+    <br><br>
+    <a href="/success">Other Activities</a>
+    <footer>
+        <p>Photo credit:Christina Hawkins, Unsplash.com </p>
+    </footer>
+</body>
+</html>

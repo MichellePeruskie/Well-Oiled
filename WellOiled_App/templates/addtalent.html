@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Talent</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header> 
+        <div id="logodiv">
+            <a href="/"><img src="{% static 'img/Well-Oiled-Logo.png' %}" alt="well-oiled-logo" id="logo"></a>
+            <p style="font-style: italic;">The scheduling solution for your technical workforce.</p>
+        </div>
+        <div id="headerlinkdiv">
+            <a class="whitelink">Contact</a>
+            <a class="whitelink" href="/logout">Logout</a>
+        </div>
+    </header><br>
+    <h2>Add New Talent</h2>
+    <a href="/viewemployees">Update existing talent here</a><br>
+    <div class="employee_info">
+        <form action="/createemployee" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+            <h3>Employee Information</h3>
+            <p>First Name: <input type="text" name="e_f_n"></p>
+            <p>Last Name: <input type="text" name="e_l_n"></p>
+            <p>Company Email: <input type="text" name="e_c_email"></p>
+            <p>Job Title: <input type="text" name="e_job"></p>
+            <!-- <p>Competency Level: <input type="" name="comp_level"></p> -->
+            <p><label for="comp_level">Competency Level: </label>
+            <select id="comp_level" name="comp_level" size="3">
+                <option value="level1">Level 1</option>
+                <option value="level2">Level 2</option>
+                <option value="level3">Level 3</option>
+            </select></p>
+            <p>Home Office Zipcode: <input type="number" maxlength="5" name="e_zip" size="5"></p>
+            <p>Initial Password: <input type="password" name="e_pw"></p>
+            <p>Confirm Initial Password: <input type="text" name="e_conf_pw"></p>
+            <p>Upload Photo: <input type="file" name="talentphoto"></p>  
+            <button>Add New Talent</button>
+        
+            <!-- <div class="qual_info">
+                <h3>Qualifications</h3>
+                <h5>Level 1</h5>
+                <p><input type="checkbox" name="s_tap"> Small tapping machine</p>
+                <p><input type="checkbox" name="l_tap"> Large tapping machine 
+                </p>
+                <h5>Level 2</h5>
+                <p><input type="checkbox" name="s_com"> Small Completion Plug</p>
+                <p><input type="checkbox" name="l_com"> Large Completion Plug</p>
+                <h5>Level 3</h5>
+                <p><input type="checkbox" name="p_iso"> Pipeline Isolation</p>
+                <p><input type="checkbox" name="hp_a"> High-pressure applications</p>
+                <p><input type="checkbox" name="a-tap"> Angle Tapping</p><br>
+            
+            </div>  -->
+        </form>    
+    </div>
+    <img src="/static/img/onboarding_tips.jpg" alt="5 tips for an engaging employee onboarding experience" class="addtalentonboard" href="https://www.slideshare.net/elena_m/10-tips-on-new-hire-orientation-onboarding">
+    <footer>
+        <p>image credit: Eduson.tv</p>
+    </footer>
+</body>
+</html>

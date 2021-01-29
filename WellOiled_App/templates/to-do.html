@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What do you want to do?</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header> 
+        <div id="logodiv">
+            <a href="/"><img src="{% static 'img/Well-Oiled-Logo.png' %}" alt="well-oiled-logo" id="logo"></a>
+            <p style="font-style: italic;">The scheduling solution for your technical workforce.</p>
+        </div>
+        <div id="headerlinkdiv">
+            <a class="whitelink">Contact</a>
+            <a class="whitelink" href="/logout">Logout</a>
+        </div>
+    </header>
+    <br>
+    <p style="color:black;">Hey there, {{request.session.username}}!</p>
+    <p><a href="/updateprofile">Edit Profile</a></p>
+    <h1>What do you want to do today?</h1>
+    <div id="todobackground">
+        <div class="addtalent">
+            <h2><a href="/renderemployeepage" class="whiteheader">Add new talent</a></h2>
+        </div>
+        <div class="edittalent">
+            <h2><a href="/viewemployees" class="whiteheader">Update talent</a></h2>
+        </div>
+        <div class="schedulejob">
+            <h2><a href="/schedulejob" class="whiteheader">Find Qualified Talent</a></h2>
+        </div>
+        <div class= "viewdocs">
+            <h2><a href="/viewdocs" class="whiteheader">View documentation</a></h2>
+        </div>
+    </div>
+    <footer>
+        <p>Photo credit: J. Kelly Brito, Unsplash.com</p>
+    </footer>
+</body>
+</html>
