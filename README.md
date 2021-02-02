@@ -3,6 +3,7 @@
 Deployment-ready talent planning and tracking system built with a Python framework that allows organizations to add and track technical employees, view related job aids, and utilize a Google Maps API.
 
 # Short Video Overview
+Watch with sound here: https://youtu.be/_Sm3qmxHEEg
 ![Well-Oiled Overview Video](images/Well-Oiled_Video_Walkthrough.gif)
 
 # Instructions
